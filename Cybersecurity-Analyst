@@ -1,0 +1,136 @@
+# Today's Cybersecurity Analyst
+
+## Overview
+Cybersecurity analysts are responsible for protecting CIA of information in general and/or organizations . This requires a commitment to a 'defense-in-depth approach', using multipe overlapping security controls to achieve this goal. It also requires a strong understanding of the attack surface of an organization. allowing their organization to develop control sets capable of preventing and mitigating threats. This writeup will cover how to assess security threats, determine risk to CIA and the tools used to secure networks/endpoints then evaluate the effectivceness of those tools.
+
+### Objective
+- understand the importance of protecting CIA
+## Key Terms
+| Defense-in-depth approach |
+| Confidentiality | ensuring unauthorized individuals cannot gain access to sensitive information |
+| Integrity | ensuring unauthorized modification of information/systems has not taken place intentionally/unintentionally |
+| Availability | ensuring information/systems are ready to meet the needs of legitimate users when needed |
+| Fault Tolerance |
+| Clustering |
+| Privacy | how an organization/user can use, share and maintain information that it has collected
+| PII(Personally Identifiable information) |
+| GAPP(Generally Accepted Privacy Principles) | outline (10) privacy practices organizations work to follow. Best practices for building a privacy program |
+| GDPR(General Data Protection Regulation) | EU privacy law. Requires organizations that handle PII of EU residents meet privacy requirements during processing |
+| Vulnerability | weakness in a device, system, application, or process that may threaten the CIA triad of an organizations information. Internal factors controlled by the security team
+| Apache |
+| Threat | outside force that may exploit a vulnerability |
+| Risk | combination of a vulnerability and the corresponding threat vector |
+| Risk assessment |
+| Adversarial threats | individuals, groups, organizations attempting that attempt to undermine the CIA triad of an organization |
+| Accidental threats | unintended actions by individuals doing their routine work that undermine the CIA triad |
+| Environmental threats |natural or human-made disasters outside the control of an organization |
+| Structural threats | failure of equipment, software or environmental controls due to exhaustion of resources, exceeding operational capacity, or age |
+| Insider threats | rogue employees, disgruntled team members, incompetent admins |
+
+## Cybersecurity Overview
+- security professionals develop/implement security controls(firewalls, ACLs and encryption(to ensure confidentiality)
+- integrity threats may come from attackers or non-malicious sources(power spikes which may corrupt information)
+- availability controls include fault tolerance, clustering, and backups
+- threats to availability may come from attackers or non-malicious sources(fire destroying a datacenter)
+- PII is often protected by regulatory standards
+- PII is always governed by ethical considerations
+- organizations seek to protect the security of private information
+- privacy and security are complementary and overlap(but have different objectives
+- (10) GAPP 
+  - Management
+    - organizations should document privacy practices(in a privacy policy or related document)
+  - Notice
+    - organizaitons should notify individuals about the privacy practices of the organizaiton and inform them of 'the type of information it collects' and 'how that information is used'
+  - Choice and Consent
+    - organizations should obtain direct consent from individuals(for stroage, use and sharing of their PII)
+  - Collection
+    - organizations should collect PII only for 'the purposes identified in the notice and consented to by the individual
+  - use, retention, and disposal
+    - organizations should only use information for identified purposes, may not use information collected for any non-disclosed purpose
+  - access
+    - organizations should provide individuals with access to any PII collecte din the organizations records, at the individuals request
+  - disclosure
+    - organizations will disclose information to third parties(only when consistent with notice and consent)
+  - security
+    - PII confidentiality will be protected
+  - quality
+    - PII integrity will be protected
+  - monitoring and enforcement
+    - organizations will put business processes in place to ensure compliance
+- privacy laws require implementation of several GAPPs(in some jurisdictions and industries)
+
+### Evaluating Security Risks
+- risk analysis is the 'cornerstone of information security'
+- analysts must understand their technological environment and external threats to the security of their information
+- risk assessment combines information about internal/external factors. Helps analysts understand threats facing their organization and design control sets to handle threats
+- Example:
+  - Web server running outdated version of Apache service
+    - may contain vulnerability(that would allow a DoS attack against the websites hosted on the web server)
+    - availability risk
+    - can be remediated by upgrading Apache service(to the most recent version(assuming that is not susceptible to this type of DoS vulnerability)
+  - Bad actor attempting to conduct a DoS attack against a website that has a known vulnerability due to out-of-date Apache services
+    - poses a threat to the availability of the web service
+  - Bad actor targets an organizations web sever with a DoS attack, but the server was patched
+    - server is no longer 'vulnerable to this attack'
+    - there is NO risk(even though a threat is present), because there is no vulnerability
+  - Datacenter may be vulnerable to the damage caused by an earthquake(due to the walls not being built to withstand extreme movements), but the datacenter is located in a region where earthquakes are rare
+    - the datacenter is vulnerable 
+    - there is no plausible threat 
+    - since there is a vulnerability but no threat, then there is no risk
+- threats may or may not be malicious in nature
+- natural disasters are threats to availability(may cause damage to equipment that hosts essential services)
+- security cannot do much to eliminate natural disaster threats
+- organizations should routinely conduct risk assessment
+- NIST publishes a guide for conducting risk assessments(widely used throughout the cybersecurity field as a foundation for (RA)
+  - NIST SP 800-30
+  - suggests an organization should identify threats/vulnerabilities
+  - use 'that information' to determine 'level of posed risk'
+
+### Identify Threats
+- organizations begin risk assessment by identifying 'types of threats that exist in their threat environment'
+- malware and spam are threats to all organizations
+- some threats are targeted against specific types of organizations
+  - government-sponsored APT attacks
+    - target goverment agencies, military organizations, companies that may operate in related fields
+    - unlikely to target an elementary school
+- NIST identifies (4) categories of threats faced by organizations that should be considered in their threat identification
+- Adversaries may include: trusted insiders, competitors , suppliers, customers, business partners, or nation-states
+- analysts should consider: capability of the threat actor(s) to engage in attacks, intent of the threat actor(s), likelihood that they will target your organization, the possible range of effects that a threat may have on your organization, common natural environmental threats to their geographic region, how to appropriately prevent/counter human-made environmental threats
+- system admins may accidentally delete critical disk volumes
+  - may cause loss of availability
+- structural threats may come from IT componenets(storage, servers, network devices), environmental controls(power and cooling infrastructure), software(OS and apps), 
+- environmental threats include fires, flooding, storms, power failures, widespread telecommunication disruptions
+- nature/scope of threats vary(depending on the nature of the organization, composition of its tech infrastructure, and situation-specific circumstances)
+- it may be helpful to obtain copies of risk assessments performed by similar organizations(as a starting point)
+
+### Identify Vulnerabilities
+- weaknesses that be exploited/exposed/compromised, ultimately endangering CIA 
+
+### Determining Likelihood, Impact, and Risk
+- assessing probability that a risk will materialize, and impact the risk would have if it does occur
+- assess the probability that a threat source will initialize the risk
+  - an adversarial threat source executing an attack against your organization
+  - an environmental, structural or accidental threat source occuring  in your organization
+- risk assessors assign an overall likelihood rating
+  - using categories such as High, Medium, or Low
+- risk assessors evaluate impact of risk using a rating scale, attempting to identify the magnitude of the risk on your organization's CIA
+- risk assessment may use quantitative techniques to numerically assess likelihood and impact
+- Example:
+  - organization may decide the likelihood of threat actor attack is 'medium' and impact would be 'high'
+    - this combination would be considered a 'high' overall risk
+  - organization may assess likelihood of a flood 'medium' and 'impact' low
+    - this combination would be considerd a 'low' overall risk
+- many organizations use a risk matrix to determine overall risk 
+
+
+
+## Security Relevance
+Why this topic matters in a SOC or security operations role.
+
+## Examples
+Add examples, commands, alerts, or scenarios here.
+
+## Key Takeaways
+- Takeaway 1
+- Takeaway 2
+- Takeaway 3
