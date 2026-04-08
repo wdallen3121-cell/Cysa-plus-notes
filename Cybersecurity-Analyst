@@ -26,8 +26,25 @@ Cybersecurity analysts are responsible for protecting CIA of information in gene
 | Environmental threats |natural or human-made disasters outside the control of an organization |
 | Structural threats | failure of equipment, software or environmental controls due to exhaustion of resources, exceeding operational capacity, or age |
 | Insider threats | rogue employees, disgruntled team members, incompetent admins |
+| Risk acceptance |
+| Risk avoidance |
+| Risk mitigation |
+| Risk transference |
+| Technical controls | systems, devices, software, settings that work to enforce CIA requirements |
+| Operational controls | practices and procedures that enforce CIA requirements |
+| NAC(network access control) |
+| 802.1x |
+| Supplicant |
+| Authenticator |
+| RADIUS |
+| Agent-Based Solution | requires that the device requesting access run special software to communicate with the NAC service |
+| Agentless Solution | conducts authentication in a web browser. Does not require software |
+| In-Band/In-line Solution | use dedicated appliances that sit between devices and the resources that they wish to access. Deny/limit network access(if the devices do not pass the authentication proecss |
+| Firewall | sit at the boundaries between networks. Provide perimeter security |
+| screened subnet | special network zone. Designed to house systems(such as web/email servers) that receive connections from the wider internet |
+| Default Deny Principle | if there is no rule explicitly allowing a connection, the firewall will deny that connection |
 
-## Cybersecurity Overview
+### Cybersecurity Overview
 - security professionals develop/implement security controls(firewalls, ACLs and encryption(to ensure confidentiality)
 - integrity threats may come from attackers or non-malicious sources(power spikes which may corrupt information)
 - availability controls include fault tolerance, clustering, and backups
@@ -120,7 +137,83 @@ Cybersecurity analysts are responsible for protecting CIA of information in gene
     - this combination would be considered a 'high' overall risk
   - organization may assess likelihood of a flood 'medium' and 'impact' low
     - this combination would be considerd a 'low' overall risk
-- many organizations use a risk matrix to determine overall risk 
+- many organizations use a risk matrix to determine overall risk
+
+### Reviewing Controls
+- security professionals use 'risk management strategies'(risk acceptance, risk avoidance, risk mitigation, risk transference
+- reduce the likelihood/impact of 'risks identified during risk assessments'
+- organizations manage security risks
+  - develop technical/operational security controls that mitigate 'those risks'(to acceptable levels)
+- technical control examples:
+  - building a secure network
+  - implementing endpoint security
+- operational control examples:
+  - conducting penetration testing
+  - using reverse engineering to analyze acquired software
+
+### Building a Secure Network
+- threats exploit vulnerabilities(in a network)
+  - to gain intial access(to systems and information)
+- Examples of controls that contribute to secure networks:
+  - NAC(network access control) solutions
+  - network perimeter security controls(firewalls)
+  - network segmentation
+  - use of deception as a defensive measure
+
+### NAC(Network Access Control)
+- controlling access to an organization's network
+- limit network access to authorized individuals
+- ensure 'systems accessing the organization's network' meet basic security requirements
+- 802.1x protocol is a common NAC standard used when devices attempt to connect to a network(either through wireless or ethernet)
+  - device must pass authentication
+- supplicant software
+  - resides on a device(requesting to join a network)
+  - communicates with a service called an 'Authenticator'
+- authenticator runs on a WAP or a network switch. Does not have 'the information necessary to validate the user'. Passes access requets to an authentication server using the RADIUS protocol
+- switch or access point joins the device to the network(if the user correctly authenticates and is authorized to access the network)
+- user is denied access/sent to quarantine network for remediation(if the user fails authentication)
+- Captive portal(found in public establishments) is an example of an in-band/in-line NAC solution.
+- Out-of-Band NAC solutions(such as 802.1x). Leverage existing network infrastructure. Network devices communicate with authentication servers. Reconfigure the network to grant/deny network access
+- make 'network admission decisions'(based on Time of Day, Role, Location)
+  - Time of Day:
+    - specific time periods(such as business hours)
+  - Role:
+    - role in an organization
+    - users may be assigned to particular network segments
+    - example:
+      - Universities
+        - assign faculty/staff to an administrative network(that may access administrative systems)
+        - assign steudents to an academic network(that has limited access to resources)
+  - Location:
+    - physical location
+    - example:
+      - access to a datacenter network
+        - limited to systems physically present in the datacenter
+
+   - System Health:
+     - NAC solutions may use agent software(to obtain configuration information from the device)
+     - devices may fail to meet minimum security standards
+     - incorrectly configured 'host firewalls'
+     - outdated virus definitions
+     - missing security patches
+     - administrators may create NAC rules(that limit access based on any combination of 'these characteristics)
+
+### Firewalls and Network Perimeter Security
+- NAC solutions do not provide protection from intruders seeking to gain access(over a network connection)
+- firewalls are typically configured in 'triple-homed fashion'
+  - firewall connects to (3) different networks
+    - Internet
+    - Internal Network
+    - DMZ/screened subnet
+- any traffic attempting to pass from one zone to another(must pass through the firewall)
+- Internet facing systems should be placed on an isolated network
+  - pose little threat to internal network(if compromised)
+  - connections between the screened subnet and internal network must pass through a firewall. Subject to the firewall's security policy
+- firewalls evaluate connection requests based on the firewall's rule base(called an ACL). Follow default deny principle.
+- ACLs identify the types of traffic permitted to pass through a firewall
+- rules specify the source/destination IP address and 'destination port corresponding to the authorized service'
+
+
 
 
 
