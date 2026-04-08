@@ -43,6 +43,10 @@ Cybersecurity analysts are responsible for protecting CIA of information in gene
 | Firewall | sit at the boundaries between networks. Provide perimeter security |
 | screened subnet | special network zone. Designed to house systems(such as web/email servers) that receive connections from the wider internet |
 | Default Deny Principle | if there is no rule explicitly allowing a connection, the firewall will deny that connection |
+| Jump Box | server that acts as a secure transition point between (2) zones. Layer of insulation against 'systems that may only be partially trusted |
+| Honeypots | systems designed to appear as 'lucrative targets' due to the services they run, vulnerabilities they contain, sensitive information they appear to host |
+| DNS sinkholes | feed false information to malicious software found on an enterprise network |
+| C&C/C2 |
 
 ### Cybersecurity Overview
 - security professionals develop/implement security controls(firewalls, ACLs and encryption(to ensure confidentiality)
@@ -212,6 +216,94 @@ Cybersecurity analysts are responsible for protecting CIA of information in gene
 - firewalls evaluate connection requests based on the firewall's rule base(called an ACL). Follow default deny principle.
 - ACLs identify the types of traffic permitted to pass through a firewall
 - rules specify the source/destination IP address and 'destination port corresponding to the authorized service'
+- several types of firewalls:
+  - Packet Filtering Firewalls
+    - check the characteristics of each packet(against firewall rules, without any additional 'intelligence')
+    - found in routers and network devices
+    - considered rudimentary
+  - Stateful Inspection Firewalls
+    - check characterisics of each packet
+    - maintain information about 'the state of each connection that passes through the firewall'
+    - basic firewall
+    - sold as stand-alone product
+  - NGFW(Next-generation firewall)
+    - check characteristis of each packet
+    - maintain information about 'the state of each connection that passes through the firewall'
+    - incorporate contextual information about users, applications, business processes
+    - current 'state-of-the-art' in network firewall protection
+    - very expensive(compared to stateful inspection devices)
+  - WAF(Web Application Firewalls)
+    - specialized firewalls 
+    - protect web application attacks(SQL injection/XSS)
+
+### Network Segmentation
+- a principle of network design(used in Firewalls)
+- seperate networks that differ in needed security level
+  - Example:
+    - internal network is seperated from screened subnet, which is seperated from the Internet
+      - all (3) have differeing security level
+- internal networks should be segmented as well into differing 'zones of trust'
+  - Example:
+    - (700) employee organization with large data center(in corporate headquarters)
+    - datacenter houses sensitive systems(database servers containing PII, business plans, critical asset information)
+    - corporate network houses employees, contractors, visitors, other persons
+    - these networks should be segmented from each other(by use of a firewall)
+    - firewall protects datacenter network from less trusted corportate network
+    - screened subnet network contains a server called a 'jump box'
+- system administrators(who need access to datacenter networks)
+  - should not connect devices directly to the datacenter network
+  - should initiate an administrative connection to a jump server(using SSH, RDP or similar remote administrative protocol)
+  - should connect from the jump server to the datacenter network(after authentication)
+    - provides isolation between their own system and datacenter network
+- connections to a jump server should be controlled/protected(with strong MFA authentication)
+- Example:
+  - Contractors who bring equipment owned by their employer onto your network
+  - employees who bringn personally owned devices
+    - a jump server should be used to prevent those types of systems from directly connecting to a company's systems
+
+### Defense Through Deception
+- active defense measures
+- lure attackers to specific targets
+- seek to monitor their activity(in a controlled environment)
+- honeypots simulate successful attacks and monitor attacker activities(to learn about their intentions). Feed network blacklists(blocking inbound activity from any IP address that attacks the honeypot)
+- DNS sinkhole example:
+  - compromised system
+    - attempts to obtain information, froma DNS server, about it's C2 server
+    - DNS server detects suspicious request
+    - responds with IP address of a 'sinkhole system'
+    - sinkhole system detects and remediates the botnet-infected system
+
+### Secure Endpoint Management
+- laptops, PCs, tablets, smartphones other endpoint devices are considered 'threats to a network'
+  - interact directly with end users
+  - require careful configuration management(to ensure they remain secure, are not vulnerabilities to the enterprise network)
+
+### Hardening System Configurations
+- OS are complex software and perform thousands of functions
+- code bases that make up modern OS are a considered a vulnerability(evidenced by frequent security patches issued by OS vendors)
+- endpoints are protected by 'hardending configurations', making them resistent as possible to threats
+  - disabling unnecessary services/ports(reduces susceptibility)
+  - ensure 'secure configuration settings exist'(on devices)
+  - central control of device security settings
+
+### Patch Management
+- security patches must be maintained on all OS/apps
+- attackers are made aware of vulnerabilities through the security patch information. Attempt to exploit vulnerable systems
+- enterprises should test patches prior to deployment onto production systems/networks
+- patch management software makes it easier to distribute/monitor the 'patch level' of a system
+  - Example:
+    - Microsoft Endpoint Manager
+      - allows administrators to quickly view patch status of enterprise systems
+
+### Compensating Controls
+- Example:
+  - organization cannot upgrade OS on retail PoS terminal(due to incompatibility with PoS software)
+    - security team seeks out compensating controls(designed to provide a similar level of security using alternate means)
+    - administrators place the PoS terminal on a segmented and isolated network. Use IPS to monitor and block suspicious network traffic
+
+### Group Policies
+- 
+
 
 
 
