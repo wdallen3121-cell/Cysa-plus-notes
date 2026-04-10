@@ -47,6 +47,14 @@ Cybersecurity analysts are responsible for protecting CIA of information in gene
 | Honeypots | systems designed to appear as 'lucrative targets' due to the services they run, vulnerabilities they contain, sensitive information they appear to host |
 | DNS sinkholes | feed false information to malicious software found on an enterprise network |
 | C&C/C2 |
+| GPO(Group Policy Object) | Microsofts mechanism for defining 'groups of security settings' one time. Applies settings to all systems in an enterprise or group of systems(based on role). |
+| MAC |
+| DAC | Owner of a file/resource controls the permissions on that resource. Delegates them at the owner's discretion |
+| SELinux | OS developed by NSA. Enforces MAC  |
+| Decomposition | engineers start with the finished product and work their way back to its component parts |
+| Sandboxing | approach used to detect malicious software(based on its behavior rather than it's signature) |
+| Code detonation | automated reverse engineering technique. Takes action based on observed behavior of software |
+| Source Code |
 
 ### Cybersecurity Overview
 - security professionals develop/implement security controls(firewalls, ACLs and encryption(to ensure confidentiality)
@@ -302,7 +310,142 @@ Cybersecurity analysts are responsible for protecting CIA of information in gene
     - administrators place the PoS terminal on a segmented and isolated network. Use IPS to monitor and block suspicious network traffic
 
 ### Group Policies
-- 
+- provide admins with efficient way to manage security/system configuration settings(across large number of devices)
+- Example:
+  - GPO designed to enforce Windows firewall settings(on sensitive workstations)
+    - configured to require the use of Windows Firewall/block all inbound connections
+- Admins use GPOs to control a wide variety of Windows settings. Create different policies that apply to different 'classes of systems'
+
+### Endpoint Security Software
+- specialized security software
+- designed to enforce 'the organization's security objectives'
+- antivirus software(designed to scan the system for signs of malicious software)
+- host-based firewall software(basic firewall for the individual system). Complements network-based firewall controls.
+- HIPS(Host Instrusion Prevention Systems). Block suspicious network activity.
+- should report status to centralized management system. Allowing admin to monitor from single location
+
+### MAC(Mandatory Access Controls)
+- admins may opt to implement a MAC approach
+- admins set all security permissions
+- end users cannot permissions
+- contrasted with DAC(discretionary access model)
+
+### Penetration Testing
+- analysts are responsible for monitoring 'the ongoing effectiveness of security controls
+- Penetration testing is a technique used to test effectiveness of security controls
+- tester simulates an attack(against an organization). Uses information/tools/techniques/ available to a real attacker.
+- Pen testers attempt to gain access to systems/information. Report their findings to management
+- results are used to further secure an enterprise
+- testing may be performed by internal staff or by external consultants
+- requires skill
+- time-comsuming
+- can be expensive to conduct externally
+- should be completed periodically
+- one of the best measures to measure an organization's security posture
+- NIST divides Pen Testing into (4) phases(Planning, Discovery, Attack, Reporting)
+
+### Planning a Penetration Test
+- lays administrative foundation for a test
+- details should be agreed upon(at the beginning, in writing), to avoid problems during/after testing
+- unauthorized testing may be considered illegal
+- (3) rules of engagement(to finalize during a planning phase:
+  - Timing:
+    - When will the test take place?
+    - Will technology staff be informed of the test?
+    - Can it be timed to have as little impact on business operations as possible?
+  - Scope:
+    - What is the agreed-on scope of the pen test?
+    - Are any systems, networks, personnel, business processes off-limits
+  - Authorization
+    - Who is authorizing the pen test?
+    - What should testers do if they are confronted by an employee/individual who notices their suspicious activity?
+
+### Conducting Discovery
+- technical work of Pen Test
+- reconnaissance(gathering of information about the targeted network, systems, users, applications)
+- conducting reviews of publicly available material, performing port scans, using network vulnerability scanners and web app testsers
+- probing for vulnerabilities
+
+### Executing a Pen Test
+- attempt to bypass security controls and gain access to systems/apps/information
+- follow the NIST attack process(Gain Access, Escalate Privilege, Browse System, Install additinal tools)
+- cyclical process
+- attackers use information obtained during the discovery phase
+- continue until the time alloted is exhausted
+
+### Communicating Penetration Test Results
+- after test is completed
+- detailed report
+- communicates the access they were able to achieve, the vulnerabilities that were exploited
+- valuable security planning tools
+- describe the actual vulnerabilities that may be used by an attacker
+- contain detailed appendixes that include the results of various tests
+- may be shared with system admins responsible for remediating issues
+
+### Training and Exercises
+- wargame exercises
+- effective way to educate security professionals on modern attack attack and defense tactics
+- teams of professionals against each other(in a cyberdefense scenario)
+- performed in simulated environments(rather than production systems)
+- (3) teams are involved(Red Team, Blue Team, White Team):
+  - Red Team
+    - attacker
+    - uses reconnaissance/exploitation tools
+    - attempt to gain access to a protected network
+    - similar to Pen Testers
+  - Blue Team
+    - secures the targeted environment
+    - attempts to prevent penetration
+    - maintains/monitors set of security controls
+  - White Team
+    - coordinates the exercise
+    - maintains technical environment
+
+### Reverse Engineering
+- vendors do not release 'the details of how their hardware/software works'
+- malicious software authors do not explain their programs
+- work backward from a finished product(to figure out how it works)
+- may be used as a means of discovery
+- uses a philosophy known as 'Decomposition'
+
+### Isolation and Sandboxing
+- customized malware(developed by APT actors who create specialized tools designed to penetrate a single target) are a very large threat to specific organizations)
+  - never been used
+  - not detectable(with signature-detection technology used by traditional AV software)
+- watch systems/networks for 'unknown pieces of code'
+- when they detect an application has not been seen before
+  - the code is isolated(in an environment called a sandbox)
+  - does not have access to any other system/application
+  - executes the code
+  - watches how the unknown code behaves
+    - does it scan the network(for other systems, sensitive information)?
+    - does it communicate with a C2 server?
+    - does it perform any other potentially maliciuos activity?
+- blocks the code from entering an organizaiton's network
+- flags it for administrative review
+
+### Reverse Engineering Software
+- developers write software in 'human-readable language(C/C++, Java, Ruby, Python)
+- computers process code(in one of two ways)
+- Interpreted Languages(Ruby and Python)
+  - computers works directly from the 'source code'
+  - code can be analyzed by 'reading through the code'
+- Compiled Languages(Java and C/C++)
+  - developers use a tool called a compiler(converts the source code into binary, that is readable by the computer)
+  - binary code is then distributed to users of the software
+  - binary is very difficult to impossible to read(to determine what it is doing)
+  - makes reverse-engineering difficult
+- Technologists have (2) options for reverse-engineering complied code:
+  - 1) Use specialized program(known as decompiler) 
+       - converts the binary back into source code
+       - usually does not work well
+  - 2) Use a specialized environment
+       - carefully monitor 'how the software resonds to different inputs)
+       - attempt to discover inner workings
+- Technologists can easily detect whether (2) pieces of compiled code are identical/whether one has been modified
+
+### Reverse Engineering Hardware
+
 
 
 
