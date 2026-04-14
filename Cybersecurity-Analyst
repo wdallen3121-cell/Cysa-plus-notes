@@ -445,6 +445,54 @@ Cybersecurity analysts are responsible for protecting CIA of information in gene
 - Technologists can easily detect whether (2) pieces of compiled code are identical/whether one has been modified
 
 ### Reverse Engineering Hardware
+- more difficult than reverse engineering software
+- authenticity of hardware is in the 'invisible code embedded within integrated circuits/firmware'
+- hardware should be verified for source authenticity(comes from a trusted source
+- U.S. government operates a 'trusted foundary program'(for critical defense systems)
+- DoD/NSA certify companies as 'trusted foundaries approved to create integrated circuits for government use
+- companies must prove a 'secure production process'(design, prototyping, packing, assembly, etc)
+- operate unknown hardware in a controlled environment
+- observe how it responds to different inputs
+- obtain documentation from OEMs(could provide insight into how components of a hardware function
+
+### Compromising Cisco Routers
+- U.S. government has engaged in reverse engineering of 'hardware designed to circumvent security'
+- NSA intercepts packages(switches, routers, and other network gear)
+  - inserts covert firmware(that facilitates government monitoring)
+
+### Efficiency and Process Improvement
+- analysts primarily perform routine work
+  - analyze logs
+  - assess vulnerabilities
+- analysts can make mistakes
+- strong teams invest time/money in improving processes, using standardization, automation
+  - improves efficiency
+  - reduces error
+  - frees valuable time(for more significant work)
+
+### Standardize Processes and Streamline Operations
+- create standardized processes(for recurring activities)
+- think of which activities you will have to do in the future
+- make use of playbooks for standardized processes
+- carry out steps that have already been thought through
+- process ensures different members of the team respond consistently in similar situations
+
+### Cybersecurity Automation
+- Standardizing tasks help identify opportunities for automation
+- some tasks can be automated(considered minimizing human engagement)
+- SOAR platforms provide opportunity to automate 'security tasks that cross between multiple systems'
+- automated tasks should have (2) characteristics
+  - repeatable
+  - do not require human interaction
+- existing automations should be managed
+
+### SOAR Platforms
+- improve use of threat intelligence
+- bring information about threats into a SOAR
+- enriches 'data about ongoing incidents'
+- improves ability to react to emerging cybersecurity situations
+- provides you with the opportunity to combine information received through multiple threat feeds and develop a comprehensive landscape and security posture
+
 
 
 
